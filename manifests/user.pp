@@ -1,7 +1,7 @@
-define tilde::user ($pubkey_type = 'ssh-rsa', $pubkey) {
+define tildetown::user ($pubkey_type = 'ssh-rsa', $pubkey) {
   $username = $title
   $home = "/home/${username}"
-  $channel = $tilde::irc::channel
+  #$channel = $tilde::irc::channel
 
   user { $username:
     ensure => present,
@@ -17,20 +17,40 @@ define tilde::user ($pubkey_type = 'ssh-rsa', $pubkey) {
   }
 
   file { "${username}/.ssh":
-    path => "/home/${username}/.ssh",
+    path => "${home}/.ssh",
     ensure => directory,
     owner => $username,
     group => $username,
   }
 
-  # TODO weechat
+  file { "${home}/.vimrc":
+    ensure => file,
+    replace => false,
+    owner => $username,
+    group => $username,
+    source => 'puppet:///modules/tildetown/vimrc',
+  }
 
-  #file { "/home/${username}/.twurlrc":
-  #  ensure => file,
-  #  owner => $username,
-  #  group => $username,
-  #  replace => false,
-  # TODO not using a module...i hope
-  #  source => "puppet:///modules/tilde/twurlrc",
-  #}
+  file { "${home}/public_html":
+    ensure => directory,
+    owner => $username,
+    group => $username,
+    replace => false,
+  } ->
+  file { "${home}/public_html/index.html":
+    ensure => present,
+    owner => $username,
+    group => $username,
+    replace => false,
+    source => 'puppet:///modules/tildetown/index.html',
+  }
+
+  # TODO move secrets to common.yaml
+  file { "/home/${username}/.twurlrc":
+    ensure => file,
+    owner => $username,
+    group => $username,
+    replace => false,
+    source => "puppet:///modules/tildetown/twurlrc",
+  }
 }
