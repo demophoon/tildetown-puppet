@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source /usr/local/virtualenvs/tildetown/bin/activate
+prosaic $@

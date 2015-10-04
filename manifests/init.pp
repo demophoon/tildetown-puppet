@@ -42,7 +42,13 @@ class tildetown ($users, $hostname) {
   file { '/usr/local/bin/irc':
     ensure => present,
     mode => '775',
-    source => "puppet:///modules/tildetown/irc"
+    source => "puppet:///modules/tildetown/irc",
+  }
+
+  file { '/usr/local/bin/prosaic':
+    ensure => present,
+    mode => '775',
+    source => 'puppet:///modules/tildetown/prosaic',
   }
 
   file { '/etc/motd':
