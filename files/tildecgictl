@@ -1,0 +1,23 @@
+#!/bin/bash
+
+source /usr/local/virtualenvs/tildetown/bin/activate
+cd /usr/local/tildetown-scripts/tildetown
+
+pidfile="/tmp/cgi.pid"
+bind="0.0.0.0:5000"
+
+case $1 in
+  start)
+      gunicorn -p $pidfile -b $bind app:app &
+      ;;
+  stop)
+      kill $(cat $pidfile)
+      ;;
+  status)
+      ps waux | sed -E 's/ +/ /' | cut -f2 -d' ' | grep ^$(cat $pidfile)$
+      ;;
+  restart)
+      kill $(cat $pidfile)
+      gunicorn -p $pidfile -b $bind app:app &
+      ;;
+esac

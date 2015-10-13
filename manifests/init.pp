@@ -45,12 +45,6 @@ class tildetown ($users, $hostname) {
     source => "puppet:///modules/tildetown/irc",
   }
 
-  file { '/usr/local/bin/prosaic':
-    ensure => present,
-    mode => '775',
-    source => 'puppet:///modules/tildetown/prosaic',
-  }
-
   file { '/etc/motd':
     ensure => file,
     owner => root,
