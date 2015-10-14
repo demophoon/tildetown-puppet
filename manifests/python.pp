@@ -21,11 +21,11 @@ class tildetown::python () {
     recurse => 'true',
   }
 
-  file { '/usr/bin/pyvenv':
-    ensure => link,
-    target => '/usr/bin/pyvenv-3.4',
-    require => Package['python3.4-venv'],
-  }
+#  file { '/usr/bin/pyvenv':
+#    ensure => link,
+#    target => '/usr/bin/pyvenv-3.4',
+#    require => Package['python3.4-venv'],
+#  }
 
   file { '/usr/local/bin/prosaic':
     ensure => present,
@@ -36,8 +36,7 @@ class tildetown::python () {
   python::pyvenv { $venv:
     owner => 'root',
     group => 'admin',
-    require => [File['/usr/bin/pyvenv'],
-                File['/usr/local/virtualenvs']],
+    require => [File['/usr/local/virtualenvs']],
   }
 
   python::pip { $python_packages:
