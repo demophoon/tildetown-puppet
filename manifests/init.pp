@@ -39,7 +39,7 @@ class tildetown ($users, $hostname) {
     require => File['/etc/motd'],
   }
 
-  file { '/usr/local/bin/irc':
+  file { ['/usr/local/bin/irc', '/usr/local/bin/chat']:
     ensure => present,
     mode => '775',
     source => "puppet:///modules/tildetown/irc",

@@ -1,19 +1,26 @@
-< welcome to tilde.town >
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+        _
+    o  | |    |                               
+_|_    | |  __|   _  _|_  __           _  _   
+ |  |  |/  /  |  |/   |  /  \_|  |  |_/ |/ |  
+ |_/|_/|__/\_/|_/|__/o|_/\__/  \/ \/    |  |_/
 
- * tilde.town is part of the tilde network.
- * is this new and/or scary? check out http://tilde.club/~anthonydpaul/primer.html
- * edit your public_html/index.html to do beautiful things
- * vim, emacs and nano are available
- * type 'irc' to join an internal-only irc server/channel
- * type alpine to check and send local mail to other users
- * type "tin -r" to check and post to Usenet!
- * (you can also use alpine for usenet but it is harder. directions: https://gist.github.com/nathanielksmith/ff5aa798c9e5210b224c )
- * wall is available
- * type ctrl+L if your screen becomes messed up
- * don't be afraid to ask for help in irc ^_^
- * be good to one another.
+Is this new and/or scary?
+check out http://tilde.club/~anthonydpaul/primer.html
+
+Some commands to get you started:
++--------------------------------------------------+
+| chat   | join a chatroom with other users.       |
+| alpine | read and send e-mail to other users.    |
+| wall   | broadcast a message to the whole server.|
+| nano   | edit a file (as in "nano name_of_file").|
++--------------------------------------------------+
+
+Stuff to do!
+* Edit public_html/index.html and make a beautiful thing
+* Chat with other users
+* Write some poetry
+
+Help!
+* Check http://tilde.town/~wiki for some tutorials on Unix
+* Is your screen messed up? try pressing ctrl+l
+

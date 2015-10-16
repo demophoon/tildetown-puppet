@@ -17,7 +17,6 @@ class tildetown::packages () {
     'git',
     'python3',
     'python3-pip',
-#    'python3.4-venv',
     'mongodb',
   ]
 

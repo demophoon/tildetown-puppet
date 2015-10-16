@@ -1,18 +1,22 @@
-class tildetown::python () {
+class tildetown::python ($mailgun_url, $mailgun_key, $trello_email, $guestbook_dir) {
 
   $scripts = '/usr/local/tildetown-scripts'
   $venv = '/usr/local/virtualenvs/tildetown'
-  $python_packages = ['prosaic', 'hy', 'sh', 'bpython', 'gunicorn', 'pyhocon', 'Flask', 'tildetown']
+  $python_packages = ['prosaic', 'hy', 'sh', 'bpython', 'gunicorn', 'pyhocon', 'Flask', 'tildetown', 'irc']
 
-  exec { 'scripts':
-    creates => $scripts,
-    command => "/usr/bin/git clone https://github.com/tildetown/tildetown-scripts ${scripts}"
+  file { $scripts:
+    ensure => link,
+    target => '/home/nate/tildetown-scripts',
     } ->
-    file { $scripts:
+    file { "${scripts}/tildetown/cfg.conf":
       group => 'admin',
-      ensure => 'directory',
-      recurse => true,
-    }
+      ensure => file,
+      content => template('tildetown/cfg.conf.erb'),
+      } ->
+      file { $guestbook_dir:
+        ensure => directory,
+        group => admin,
+      }
 
   file { '/usr/local/virtualenvs':
     ensure => directory,
@@ -20,12 +24,6 @@ class tildetown::python () {
     group => 'admin',
     recurse => 'true',
   }
-
-#  file { '/usr/bin/pyvenv':
-#    ensure => link,
-#    target => '/usr/bin/pyvenv-3.4',
-#    require => Package['python3.4-venv'],
-#  }
 
   file { '/usr/local/bin/prosaic':
     ensure => present,
