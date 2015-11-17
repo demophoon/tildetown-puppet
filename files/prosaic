@@ -1,4 +1,4 @@
 #!/bin/bash
 
 source /usr/local/virtualenvs/tildetown/bin/activate
-prosaic $@
+prosaic $@ --host data.tilde.town
