@@ -1,7 +1,8 @@
 define tildetown::user ($pubkey_type = 'ssh-rsa', $pubkey) {
   $username = $title
   $home = "/home/${username}"
-  #$channel = $tilde::irc::channel
+
+  $fix_shell = "/bin/grep ${username} /etc/passwd | /bin/grep :$ && chsh ${username} -s /bin/bash"
 
   user { $username:
     ensure => present,
@@ -14,6 +15,11 @@ define tildetown::user ($pubkey_type = 'ssh-rsa', $pubkey) {
     type => $pubkey_type,
     key => $pubkey,
     target => "${home}/.ssh/authorized_keys2",
+  }
+  exec { "${fix_shell}":
+    returns => [0,1],
+    # TODO this is a stopgap; having this here means that we have to run this
+    # always with apply. that's fine for now, but maybe not in the future.
   }
 
   file { "${username}/.ssh":
