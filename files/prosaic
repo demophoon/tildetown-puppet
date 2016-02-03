@@ -1,4 +1,8 @@
 #!/bin/bash
 
+
 source /usr/local/virtualenvs/tildetown/bin/activate
-prosaic $@ --host data.tilde.town
+export PROSAIC_DBHOST=data.tilde.town
+export PROSAIC_DBNAME=tildetown
+
+prosaic $@

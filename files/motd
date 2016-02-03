@@ -18,7 +18,8 @@ Some commands to get you started:
 Stuff to do!
 * Edit public_html/index.html and make a beautiful thing
 * Chat with other users
-* Write some poetry
+* Write some poetry with the `prosaic` command
+* Start a persistent session with `tmux` or `screen`
 
 Help!
 * Check http://tilde.town/~wiki for some tutorials on Unix
