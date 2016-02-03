@@ -1,13 +1,12 @@
-define tildetown::user ($pubkey_type = 'ssh-rsa', $pubkey) {
+define tildetown::user ($pubkey_type = 'ssh-rsa', $shell = '/bin/bash', $pubkey) {
   $username = $title
   $home = "/home/${username}"
-
-  $fix_shell = "/bin/grep ${username} /etc/passwd | /bin/grep :$ && chsh ${username} -s /bin/bash"
 
   user { $username:
     ensure => present,
     managehome => true,
     groups => ['town'],
+    shell => $shell,
   }
 
   ssh_authorized_key { "${username}_default":
@@ -15,11 +14,6 @@ define tildetown::user ($pubkey_type = 'ssh-rsa', $pubkey) {
     type => $pubkey_type,
     key => $pubkey,
     target => "${home}/.ssh/authorized_keys2",
-  }
-  exec { "${fix_shell}":
-    returns => [0,1],
-    # TODO this is a stopgap; having this here means that we have to run this
-    # always with apply. that's fine for now, but maybe not in the future.
   }
 
   file { "${username}/.ssh":
