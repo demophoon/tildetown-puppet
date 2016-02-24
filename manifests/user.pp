@@ -16,8 +16,7 @@ define tildetown::user ($pubkey_type = 'ssh-rsa', $shell = '/bin/bash', $pubkey)
     target => "${home}/.ssh/authorized_keys2",
   }
 
-  file { "${username}/.ssh":
-    path => "${home}/.ssh",
+  file { "${home}/.ssh":
     ensure => directory,
     owner => $username,
     group => $username,
@@ -46,7 +45,7 @@ define tildetown::user ($pubkey_type = 'ssh-rsa', $shell = '/bin/bash', $pubkey)
   }
 
   # TODO move secrets to common.yaml
-  file { "/home/${username}/.twurlrc":
+  file { "${home}/.twurlrc":
     ensure => file,
     owner => $username,
     group => $username,
