@@ -53,4 +53,18 @@ define tildetown::user ($pubkey_type = 'ssh-rsa', $shell = '/bin/bash', $pubkey)
     replace => false,
     source => "puppet:///modules/tildetown/twurlrc",
   }
+
+  file { "${home}/.weechat":
+    ensure => directory,
+    owner => $username,
+    group => $username,
+    replace => false,
+  } ->
+  file { "${home}/.weechat/irc.conf":
+    ensure => file,
+    replace => false,
+    owner => $username,
+    group => $username,
+    source => "puppet:///modules/tildetown/weechat_irc.conf",
+  }
 }
