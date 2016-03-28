@@ -41,6 +41,7 @@ class tildetown::web ($hostname) {
     vhost => $hostname,
     location => '/',
     www_root => $www_root,
+    ssl => true,
   }
 
   nginx::resource::location { 'userContent':
@@ -48,17 +49,20 @@ class tildetown::web ($hostname) {
     location => '~ "^/~(.+?)(/.*)?$"',
     vhost => $hostname,
     location_alias => '/home/$1/public_html$2',
+    ssl => true,
   }
 
   nginx::resource::location {['/guestbook', '/helpdesk']:
     proxy => $cgi_server,
     vhost => $hostname,
+    ssl => true,
   }
 
   nginx::resource::location {'/cgi':
     rewrite_rules => ['^/cgi(.*)$ $1 break'],
     proxy => $cgi_server,
     vhost => $hostname,
+    ssl => true,
   }
 
 }
